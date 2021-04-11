@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <iostream>
 #include <vector>
 
@@ -5,6 +6,12 @@ struct Player {
     int id;
     int rank;
 };
+
+void th_readfile(FILE* fin, int num, std::vector<Player>& data) {
+    for (int i = 0; i < num; i++) {
+        fscanf(fin, "%d %d", &data[i].id, &data[i].rank);
+    }
+}
 
 int main(int argc, char* argv[]) {
     FILE* fin = nullptr;
@@ -15,9 +22,7 @@ int main(int argc, char* argv[]) {
 
     std::vector<Player> data(num);
 
-    for (int i = 0; i < num; i++) {
-        fscanf(fin, "%d %d", &data[i].id, &data[i].rank);
-    }
+    th_readfile(fin, num, data);
 
     fclose(fin);
 
@@ -25,5 +30,6 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < num; i++) {
         printf("%d %d\n", data[i].id, data[i].rank);
     }
+
     return 0;
 }
