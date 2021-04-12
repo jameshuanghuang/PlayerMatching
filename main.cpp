@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <iostream>
+#include <thread>
 #include <vector>
 
 struct Player {
@@ -7,7 +8,15 @@ struct Player {
     int rank;
 };
 
-void th_readfile(FILE* fin, int num, std::vector<Player>& data) {
+struct ThreadData {
+    FILE*                fin;
+    std::vector<Player>& data;
+};
+
+void th_readfile(ThreadData threadata) {
+    FILE*               fin  = threadata.fin;
+    std::vector<Player> data = threadata.data;
+    int                 num  = data.size();
     for (int i = 0; i < num; i++) {
         fscanf(fin, "%d %d", &data[i].id, &data[i].rank);
     }
@@ -22,7 +31,10 @@ int main(int argc, char* argv[]) {
 
     std::vector<Player> data(num);
 
-    th_readfile(fin, num, data);
+    ThreadData threadata = {fin, data};
+
+    std::thread first(th_readfile, threadata);
+    first.join();
 
     fclose(fin);
 
