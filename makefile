@@ -9,5 +9,9 @@ GenPlayer: GenPlayer.cpp
 run: main
 	./main
 
+diff: main
+	./main | tee out.txt
+	diff out.txt in.txt
+
 clean:
 	rm main

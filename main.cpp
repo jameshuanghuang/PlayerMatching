@@ -1,11 +1,12 @@
+#include <algorithm>
 #include <cstdio>
 #include <iostream>
 #include <mutex>
 #include <thread>
 #include <vector>
 
-// [todo] need to test different num threads, 
-#define NUM_THREADS 2 
+// [todo] need to test different num threads,
+#define NUM_THREADS 2
 
 std::mutex mut_;
 
@@ -70,6 +71,9 @@ int main(int argc, char* argv[]) {
     }
 
     fclose(fin);
+
+    sort(data.begin(), data.end(),
+         [](Player& p1, Player& p2) { return p1.id < p2.id; });
 
     printf("%d\n", num);
     for (int i = 0; i < num; i++) {
