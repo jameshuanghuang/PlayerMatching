@@ -17,6 +17,15 @@ class Player final {
     inline int getId() const { return m_id; }
     inline int getWaitTime() const { return m_waitTime; }
 
+    inline void setRank(int rank) { m_rank = rank; }
+    inline void setId(int id) { m_id = id; }
+    inline void setWaitTime(int waitTime) { m_waitTime = waitTime; }
+    inline void setProperties(int rank, int id, int waitTime) {
+        this->setRank(rank);
+        this->setId(id);
+        this->setWaitTime(waitTime);
+    }
+
   private:
     int m_id;
     int m_rank;

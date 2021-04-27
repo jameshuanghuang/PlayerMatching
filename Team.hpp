@@ -13,11 +13,16 @@ class Team final {
     // [todo] Check potential shallow copy of vector
     inline int getRank() const { return m_rank; }
     inline int getTeamError() const { return m_teamError; }
+    inline const std::vector<Player>& getPlayers() const { return m_players; }
 
     // [todo] Avoid copy
     void addPlayer(Player player);
     void updateTeamError();
     void showTeamPlayer();
+
+    static inline int calMatchDifference(const Team& t1, const Team& t2) {
+        return t1.getRank() - t2.getRank();
+    }
 
   private:
     std::vector<Player> m_players;
